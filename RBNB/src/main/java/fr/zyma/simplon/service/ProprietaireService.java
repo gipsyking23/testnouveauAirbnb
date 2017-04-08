@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.simplon.repository.ProprietaireRepository;
 import fr.zyma.simplon.model.Proprietaire;
+import fr.zyma.simplon.repository.ProprietaireRepository;
 
 @Service("proprietaireService")
 public class ProprietaireService {
