@@ -18,8 +18,6 @@ public class ProprietaireController {
 
     @Autowired
     ProprietaireService proprietaireService ; 
-    
-   
 	
 	@RequestMapping(path="/proprietaires", method=RequestMethod.GET)
 	public List<Proprietaire> getAllEmployees(){

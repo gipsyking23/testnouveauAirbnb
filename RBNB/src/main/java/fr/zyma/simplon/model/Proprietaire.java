@@ -5,19 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "proprietaire")
+
 public class Proprietaire {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idproprietaire")
 	private Long id;
-	@Column(name = "nom")
+	
 	private String nom;
-	@Column(name = "prenom")
+	
 	private String prenom;
 
 	public String getNom() {

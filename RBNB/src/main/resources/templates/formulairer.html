@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link href="bootstrap.css" rel="stylesheet">
+<title>formulaire recherche</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+         <div class="col-md-6 col-md-offset-4"> <h1>RECHERCHER UN LOGEMENT !</h1></div>
+
+
+    </div>
+    <div class="row">
+  <div class="col-md-4 col-md-offset-4"> <img src="image\recherche.jpg" alt="maison" width="500px" height="400px" class="img-rounded">
+  </div>
+  
+    </div>
+
+<div class="row">
+			<div class="col-md-8" >
+				<form class="form-horizontal">
+				
+				
+				
+<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">VILLE</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="ville"/>
+									</div>
+					</div>
+<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">DISPO DU</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="datedu"/>
+									</div>
+					</div>
+<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">AU</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="dateau"/>
+		</div>
+					</div>
+   <div class="col-md-1 "> <button type="submit" class="btn btn-primary" id="bouton_post" >rechercher</button>
+   </div>
+</form>
+</div>
+</div>
+
+
+</div>
+<script src="/jquery.js" type="application/javascript"></script>
+	<script type="application/javascript">
+			
+		
+    $(document).ready(function () {
+       $('#bouton_post').on("click",function (e) {
+           e.preventDefault();
+        
+           var datedu, dateau, ville;
+          
+           datedu = $('#datedu').val();
+           dateau = $('#dateau').val();
+           
+       //    ville = $('#ville').val();
+          
+           if($.trim(datedu) === ""){
+               alert("logement  date du ne peut pas etre vide");
+           } 
+           else if($.trim(dateau) === ""){
+                   alert("logement  date au ne peut pas etre vide");
+           }
+       /*     else if($.trim(ville) === ""){
+                   alert("logement  ville ne peut pas etre vide");
+           } */
+           else {
+        	   $.ajax({
+                   type:"GET",
+                  
+                   url:"/resultat",
+                   data:{/* ville:ville ,*/datedu:datedu,dateau:dateau},
+                   error: function(xhr, status, error) {
+                	   var err = eval("(" + xhr.responseText + ")");
+                	   alert(err.Message);
+                	 },
+                   success:function (response) {
+                       if (confirm("le resultat de recherche"+response )){
+                           window.location.reload();
+                       }    
+                   }
+               });
+           }
+       });
+    });
+</script>
+
+
+</body>
+</html>
