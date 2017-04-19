@@ -1,5 +1,6 @@
 package fr.zyma.simplon.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,12 @@ public class LogementController {
 	         return logementservice.ajouterLogement(id, datedu, dateau, rue, ville, description);
 	    }
 	    	
- 
+	    @RequestMapping(path="/resultat", method=RequestMethod.GET)
+	    public List<Logement> rechercheLogement( @RequestParam String datedu,@RequestParam String dateau) {
+	    	List<Logement> logements= new ArrayList<>();
+	    	logements=logementservice.rechercheLogement(datedu, dateau);
+	    	return logements; 
+	    	
+	    	
+	    }
 } 

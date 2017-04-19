@@ -19,7 +19,6 @@ public class Logement {
 	@OneToOne
 	private Adresse adresse;
 	@OneToOne
-	@JoinColumn(name="iddisponibilite")
 	private Disponibilite disponibilite;
 
 	public String getDescription() {

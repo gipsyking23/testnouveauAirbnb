@@ -13,7 +13,9 @@ public class Disponibilite {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) 
+
 	private Long iddisponibilite;
+	
 	@Column(name="date_du")
 	private String dateDu; 
 	@Column(name="date_au")

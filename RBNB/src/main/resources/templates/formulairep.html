@@ -14,6 +14,7 @@
 
 
 <div class="container-fluid">
+<div id="success">
     <div class="row">
          <div class="col-md-6 col-md-offset-4"> <h1>CREEZ VOUS UN COMPTE !</h1>
          </div> 
@@ -26,14 +27,14 @@
   <div class="col-md-4 col-md-offset-2"> 
   </div>
     </div>
-    
+    </div>
     
   <div class="row">
-  
-  
-  
-  
-    <form class="form-horizontal">
+
+
+
+
+			<form id="formulaire" class="form-horizontal">
     
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">NOM</label>
@@ -63,7 +64,7 @@
   </div>
   </form>
   
-  
+  <div id="messsage"></div>
   
       </div>
 
@@ -78,10 +79,10 @@
            nom = $('#nom').val();
            prenom = $('#prenom').val();
            if($.trim(nom) === ""){
-               alert("Product nom ne peut pas etre vide");
+               alert("propriétaire nom ne peut pas etre vide");
            }
            else if($.trim(prenom) === ""){
-               alert("Product prenom ne peut pas etre vide");
+               alert("propriétaire prenom ne peut pas etre vide");
            }
            else {
                var data = {};
@@ -96,7 +97,12 @@
                    timeout: 6000,
                    success: function (response) {
                        if (confirm("Vous avez été enregistré, notez votre id: "+response+" pour ajouter un logement")){
-                           window.location.reload();
+                    	   $("#success").load("succesp.html #insertion");
+                    	   $("form").fadeOut(1000);
+                    	   
+
+
+                    	   
                        }
                    }
                });

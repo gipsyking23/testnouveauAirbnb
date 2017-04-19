@@ -13,6 +13,6 @@ public interface LogementRepository extends JpaRepository<Logement, Long> {
 	
 //	select idLogement, description, idadresse, rue, ville, iddisponibilite, date_du, date_au from adresse left join logement on idadresse = Adresse_idAdresse right join  disponibilite on Disponibilite_idDisponibilite = idDisponibilite WHERE ville =?1 and date_du >=?2 and date_au <=?3"
 
- @Query("from Logement l join l.Disponibilite d  WHERE d.date_du >=?1 and d.date_au <=?2")
+ @Query( value="select * from logement right join disponibilite on idDisponibilite = Disponibilite_idDisponibilite  WHERE date_du <=?1 and date_au >=?2",nativeQuery=true)
 	public List<Logement> rechercheLogement(String datedu, String dateau);
 }

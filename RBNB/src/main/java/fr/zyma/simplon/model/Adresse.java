@@ -12,7 +12,7 @@ public class Adresse {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idadresse")
+	@Column(name = "idadresse") 
 	private Long idadresse; 
 	private String rue; 
 	 private String ville;

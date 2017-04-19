@@ -4,7 +4,9 @@
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <link href="bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>formulaire recherche</title>
 </head>
 <body>
@@ -16,7 +18,7 @@
 
     </div>
     <div class="row">
-  <div class="col-md-4 col-md-offset-4"> <img src="image\recherche.jpg" alt="maison" width="500px" height="400px" class="img-rounded">
+  <div class="col-md-4 col-md-offset-4"> <img src="/tof.jpg" alt="maison" width="500px" height="400px" class="img-rounded">
   </div>
   
     </div>
@@ -47,13 +49,41 @@
 					</div>
    <div class="col-md-1 "> <button type="submit" class="btn btn-primary" id="bouton_post" >rechercher</button>
    </div>
+   
+   
 </form>
+<div class="row">
+			<div class="col-md-10 col-md-offset-2" >
+<h1>Logement(s) disponible(s)</h1>
+	<table id="LogementTable" class="table table-striped">
+      
+       <!-- Header Table -->
+       <thead>
+            <tr>
+                <th>Id</th>
+				<th>desciption</th>
+                <th>rue</th>
+                <th>ville</th>
+                <th>dispo du</th>
+                <th>jusqu'au</th>
+                <th>nom du propriétaire</th>
+            </tr>
+        </thead>
+         <tbody id="avant">
+      
+    </tbody>
+        
+           </table>
+</div>
+</div>
+
+<div id="feedback"></div>
 </div>
 </div>
 
 
 </div>
-<script src="/jquery.js" type="application/javascript"></script>
+
 	<script type="application/javascript">
 			
 		
@@ -61,7 +91,7 @@
        $('#bouton_post').on("click",function (e) {
            e.preventDefault();
         
-           var datedu, dateau, ville;
+           var datedu, dateau/* , ville */;
           
            datedu = $('#datedu').val();
            dateau = $('#dateau').val();
@@ -80,20 +110,29 @@
            else {
         	   $.ajax({
                    type:"GET",
-                  
                    url:"/resultat",
-                   data:{/* ville:ville ,*/datedu:datedu,dateau:dateau},
+                   data:{datedu:datedu,dateau:dateau},
+                   datatype:'json',
                    error: function(xhr, status, error) {
                 	   var err = eval("(" + xhr.responseText + ")");
                 	   alert(err.Message);
                 	 },
                    success:function (response) {
-                       if (confirm("le resultat de recherche"+response )){
-                           window.location.reload();
-                       }    
-                   }
+                       if (confirm("le resultat de recherche?!" )){
+                    $("form").fadeOut(1000); 
+              		/* var json = "<h4>Ajax Response</h4><pre>"
+            					+ JSON.stringify(response, null, 4) + "</pre>";
+            			$('#feedback').html(json);  */
+            			
+            		     var trHTML = '';
+            		        $.each(response, function (i, item) {
+            		            trHTML += '<tr><td>' + item.idlogement + '</td><td>' + item.description + '</td><td>' + item.adresse.rue +'</td><td>' + item.adresse.ville + '</td><td>' + item.disponibilité.dateDu + '</td><td>' +item.disponibilité.dateAu +'</td><td>' +item.proprietaire.nom +'</td></tr>';
+            		        });
+            		        $('#avant').prepend(trHTML);
+            			}    
+                    }
                });
-           }
+             }
        });
     });
 </script>
